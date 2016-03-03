@@ -45,74 +45,68 @@
       var prevClickedValue;
       var operatedTotal;
       var appendSetter = 0;
-      var currentValue;
 
       $('span').on('click', function (){
         var $this = $(this);
         if (!($this.hasClass('operator'))) {
-
           if (appendSetter === 0) {
             $('#screen').empty();
-          prevClickedValue = currentValue;
-          clickedValue = parseInt($this.text());
-          if (currentOperator === '+') {
-            currentTotal = clickedValue + prevClickedValue;
-          } else if (currentOperator === '-') {
-            currentTotal = prevClickedValue - clickedValue;
-          } else if (currentOperator === 'x') {
-            currentTotal = clickedValue * prevClickedValue;
-          } else if (currentOperator === '\u00f7') {
-            currentTotal = (prevClickedValue / currentValue);
+            prevClickedValue = clickedValue;
+            clickedValue = parseInt($this.text());
+            if (currentOperator === '+') {
+              currentTotal = clickedValue + prevClickedValue;
+            } else if (currentOperator === '-') {
+              currentTotal = prevClickedValue - clickedValue;
+            } else if (currentOperator === 'x') {
+              currentTotal = clickedValue * prevClickedValue;
+            } else if (currentOperator === '\u00f7') {
+              currentTotal = (prevClickedValue / clickedValue);
+            } else {
+              currentTotal = clickedValue;
+            };
+            $('#screen').append(clickedValue);
+            appendSetter = 1;
+            console.log(currentTotal);
+            console.log(clickedValue);
+            console.log(prevClickedValue)
           } else {
-            currentTotal = clickedValue;
-          };
-          $('#screen').append(clickedValue);
-          appendSetter = 1;
-          console.log(currentTotal + 'currentTotal');
-          console.log(clickedValue + 'clickedValue');
-          console.log(prevClickedValue + 'prevClickedValue');
-        } else {
+            if (appendSetter === 1) {
+              clickedValue = parseInt($this.text());
+              $('#screen').append(clickedValue);
+              clickedValue = $('#screen').text();
+              if (currentOperator === '+') {
+                currentTotal = clickedValue + prevClickedValue;
+              } else if (currentOperator === '-') {
+                currentTotal = prevClickedValue - clickedValue;
+              } else if (currentOperator === 'x') {
+                currentTotal = clickedValue * prevClickedValue;
+              } else if (currentOperator === '\u00f7') {
+                currentTotal = (prevClickedValue / clickedValue);
+              } else {
+                currentTotal = clickedValue;
+              };
 
-          prevClickedValue = currentValue;
-          clickedValue = parseInt($this.text());
-          if (currentOperator === '+') {
-            currentTotal = prevClickedValue + currentValue;
-          } else if (currentOperator === '-') {
-            currentTotal = prevClickedValue - currentValue;
-          } else if (currentOperator === 'x') {
-            currentTotal = currentValue * prevClickedValue;
-          } else if (currentOperator === '\u00f7') {
-            currentTotal = (prevClickedValue / currentValue);
-          } else {
-            currentTotal = currentValue;
-          };
-          $('#screen').append(clickedValue);
-          currentValue = $('#screen').text();
-          appendSetter = 1;
-          console.log(currentValue + 'currentvalue!');
-          console.log(currentTotal + 'currentTotal');
-          console.log(clickedValue + 'clickedValue');
-          console.log(prevClickedValue + 'prevClickedValue');
-        }
+              appendSetter = 1;
+              console.log(currentTotal);
+              console.log(clickedValue);
+              console.log(prevClickedValue)
 
-
+          }
         };
-      });
+      };
+    });
 
       $('.operator').on('click', function () {
         var $this = $(this);
         currentOperator = $this.text();
         appendSetter = 0;
-        currentValue = prevClickedValue;
         }
       );
 
       $('#cancel').on('click', function (){
         $('#screen').empty();
         appendSetter = 0;
-        prevClickedValue = 0;
-        currentValue = 0;
-        currentTotal = 0;
+        currentOperator = "";
       });
 
       $('#calc').on('click', function () {
@@ -120,7 +114,8 @@
         $('#screen').append(currentTotal);
         appendSetter = 0;
       })
-  })
+    });
+
   </script>
 
   <script type="text/javascript" src="js/main.js"></script>
