@@ -54,7 +54,7 @@
             prevClickedValue = clickedValue;
             clickedValue = parseInt($this.text());
             if (currentOperator === '+') {
-              currentTotal = clickedValue + prevClickedValue;
+              currentTotal = prevClickedValue + clickedValue;
             } else if (currentOperator === '-') {
               currentTotal = prevClickedValue - clickedValue;
             } else if (currentOperator === 'x') {
@@ -66,14 +66,14 @@
             };
             $('#screen').append(clickedValue);
             appendSetter = 1;
-            console.log(currentTotal);
-            console.log(clickedValue);
-            console.log(prevClickedValue)
+            // console.log(currentTotal);
+            // console.log(clickedValue);
+            // console.log(prevClickedValue)
           } else {
             if (appendSetter === 1) {
               clickedValue = parseInt($this.text());
               $('#screen').append(clickedValue);
-              clickedValue = $('#screen').text();
+              clickedValue = parseInt($('#screen').text());
               if (currentOperator === '+') {
                 currentTotal = clickedValue + prevClickedValue;
               } else if (currentOperator === '-') {
@@ -85,12 +85,10 @@
               } else {
                 currentTotal = clickedValue;
               };
-
               appendSetter = 1;
-              console.log(currentTotal);
-              console.log(clickedValue);
-              console.log(prevClickedValue)
-
+              // console.log(currentTotal);
+              // console.log(clickedValue);
+              // console.log(prevClickedValue)
           }
         };
       };
@@ -117,7 +115,6 @@
     });
 
   </script>
-
   <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
